@@ -1,10 +1,14 @@
-import { DarkModeButton } from "@/components";
+import { Routes, Route } from "react-router-dom";
+import { Home, Login, Register, NotFound } from "@/pages";
 
 function App() {
   return (
-    <div>
-      <DarkModeButton />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/auth/login" element={<Login />} />
+      <Route path="/auth/register" element={<Register />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 

@@ -6,9 +6,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const truncateText = (str: string) => {
-  if (str.length < 15) return str;
+  if (str.length < 16) return str;
 
-  return str.substring(0, 15) + "...";
+  return str.substring(0, 16) + "...";
 };
 
 export const formatPrice = (amount: number) => {

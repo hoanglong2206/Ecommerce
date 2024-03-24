@@ -1,5 +1,4 @@
 import { ShoppingCart } from "lucide-react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,16 +6,18 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, NavigateFunction } from "react-router-dom";
 
 const HoverCart = () => {
+  const navigate: NavigateFunction = useNavigate();
   return (
     <HoverCard>
       <HoverCardTrigger
         asChild
-        className="relative flex h-9 items-center justify-center "
+        className="relative flex h-9 items-center justify-center"
       >
         <Button
+          onClick={() => navigate("/cart")}
           variant={"outline"}
           className="flex items-center rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
         >

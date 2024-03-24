@@ -26,7 +26,7 @@ export const products = [
   },
   {
     id: "64a4ebe300900d44bb50628a",
-    name: "Logitech MX Keys Advanced Wireless Illuminated Keyboard, Tactile Responsive Typing, Backlighting, Bluetooth, USB-C, Apple macOS, Microsoft Windows, Linux, iOS, Android, Metal Build (Black)",
+    name: "Logitech MX Keys Advanced Wireless Illuminated Keyboard",
     description:
       "PERFECT STROKE KEYS - Spherically-dished keys match the shape of your fingertips, offering satisfying feedback with every tap\nCOMFORT AND STABILITY - Type with confidence on a keyboard crafted for comfort, stability, and precision",
     price: 102.99,
@@ -52,7 +52,7 @@ export const products = [
     price: 40,
     brand: "Apple",
     category: "Phone",
-    inStock: true,
+    inStock: false,
     reviews: 5,
     rating: 3,
     images: [
@@ -76,13 +76,13 @@ export const products = [
   },
   {
     id: "64a4e9e77e7299078334019f",
-    name: "Logitech MX Master 2S Wireless Mouse – Use on Any Surface, Hyper-Fast Scrolling, Ergonomic Shape, Rechargeable, Control Upto 3 Apple Mac and Windows Computers, Graphite",
+    name: "Logitech MX Master 2S Wireless Mouse",
     description:
       "Cross computer control: Game changing capacity to navigate seamlessly on 3 computers, and copy paste text, images, and files from 1 to the other using Logitech flow\nDual connectivity: Use with upto 3 Windows or Mac computers via included Unifying receiver or Bluetooth Smart wireless technology. Gesture button- Yes",
     price: 70,
     brand: "logitech",
     category: "Accesories",
-    inStock: true,
+    inStock: false,
     reviews: 4,
     rating: 3.5,
     images: [
@@ -96,7 +96,7 @@ export const products = [
   },
   {
     id: "649d775128b6744f0f497040",
-    name: 'Smart Watch(Answer/Make Call), 1.85" Smartwatch for Men Women IP68 Waterproof, 100+ Sport Modes, Fitness Activity Tracker, Heart Rate Sleep Monitor, Pedometer, Smart Watches for Android iOS, 2023',
+    name: 'Smart Watch(Answer/Make Call), 1.85" Smartwatch for Men Women IP68 Waterproof',
     description:
       'Bluetooth Call and Message Reminder: The smart watch is equipped with HD speaker, after connecting to your phone via Bluetooth, you can directly use the smartwatches to answer or make calls, read messages, store contacts, view call history. The smartwatch can set up more message notifications in "GloryFit" APP. You will never miss any calls and messages during meetings, workout and riding.',
     price: 50,

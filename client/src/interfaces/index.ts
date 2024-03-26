@@ -9,6 +9,22 @@ export interface Product {
   rating: number;
   inStock: boolean;
   images: Image[];
+  comments: Comments[];
+}
+
+export interface Comments {
+  id: string;
+  comment: string;
+  rating: number;
+  createdDate: string;
+  user: Users;
+}
+
+export interface Users {
+  name: string;
+  email: string;
+  image: string;
+  role: string;
 }
 
 export interface Image {

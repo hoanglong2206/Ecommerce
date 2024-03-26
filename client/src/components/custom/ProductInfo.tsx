@@ -1,8 +1,15 @@
 import { Rating } from "@mui/material";
 import { Button } from "@/components/ui/button";
-import { Minus, Plus, ShoppingCart } from "lucide-react";
+import {
+  CircleCheck,
+  Minus,
+  Plus,
+  ShoppingBag,
+  ShoppingCart,
+} from "lucide-react";
 import { useState } from "react";
 import { Product } from "@/interfaces";
+import { ProductImages } from "@/components";
 
 type CartProductType = {
   id: string;
@@ -30,29 +37,7 @@ const ProductInfo = ({ data }: ProductInfoProps) => {
   });
   return (
     <div className="lg:grid lg:grid-cols-2 lg:items-start gap-x-12 space-y-8">
-      <div className="grid grid-cols-6 gap-2 ">
-        <div className="flex flex-col items-center justify-center gap-4 cursor-pointer  max-h-[500px] min-h-[300px] sm:min-h-[400px]">
-          {data.images.map((image) => (
-            <div
-              key={image.color}
-              className={`relative w-4/5 aspect-square rounded border-teal-300 border-[1.5px] p-1`}
-            >
-              <img
-                src={image.image}
-                alt={image.color}
-                className="object-contain"
-              />
-            </div>
-          ))}
-        </div>
-        <div className="col-span-5 relative aspect-square">
-          <img
-            src={data.images[0].image}
-            alt=""
-            className="w-full h-full object-contain"
-          />
-        </div>
-      </div>
+      <ProductImages data={data} />
       <div className="flex flex-col gap-1 text-sm font-medium space-y-4">
         <h2 className="text-3xl ">{cartProduct?.name}</h2>
         <div className="flex items-center gap-2">
@@ -78,11 +63,19 @@ const ProductInfo = ({ data }: ProductInfoProps) => {
           {data?.inStock ? "In stock" : "Out of stock"}
         </div>
         <hr className="my-3 w-1/2 md:w-1/3" />
+        {/* <p className="flex items-center gap-x-2 text-teal-400 ">
+          <CircleCheck className="h-5 w-5" />
+          <span className="text-base">Product added to cart</span>
+        </p>
+        <Button variant={"outline"} className="w-1/2 md:w-1/3">
+          View Cart <ShoppingBag className="w-5 h-5 ml-2" />
+        </Button> */}
         <div className="flex gap-x-3 items-center">
           <span>COLOR :</span>
           <div className="flex items-center gap-x-2">
-            {data?.images.map((image) => (
+            {data.images.map((image) => (
               <div
+                key={image.color}
                 className={`h-6 w-6 rounded-full border-teal-300 flex items-center justify-center border-[1.5px]`}
               >
                 <div

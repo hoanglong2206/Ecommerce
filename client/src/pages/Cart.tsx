@@ -1,7 +1,11 @@
-import React from "react";
+import { CartClient, Container } from "@/components";
 
 const Cart = () => {
-  return <div>Cart</div>;
+  return (
+    <Container>
+      <CartClient />
+    </Container>
+  );
 };
 
 export default Cart;

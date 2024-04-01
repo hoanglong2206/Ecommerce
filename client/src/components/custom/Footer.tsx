@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import { Send } from "lucide-react";
+import { Input } from "../ui/input";
 
 const Footer = () => {
   const SITEMAP = [
@@ -22,20 +24,36 @@ const Footer = () => {
     },
   ];
   return (
-    <footer className="relative w-full bg-slate-100">
-      <div className="w-full max-w-7xl mx-auto px-6 shadow-sm pt-2">
+    <footer className="relative w-full bg-slate-800 text-white py-4">
+      <div className="w-full flex flex-col md:flex-row items-center justify-center gap-6 px-8 md:px-16 xl:px-32 py-4 border-b border-gray-700">
+        <div className="flex items-center gap-x-4">
+          <Send className="w-8 h-8" />
+          <h1 className="text-2xl font-semibold">Sign up for our newsletter</h1>
+        </div>
+        <div className="flex flex-grow items-center p-1 bg-slate-50 text-gray-800 rounded-lg w-4/5 md:w-auto">
+          <Input
+            type="email"
+            placeholder="Enter your email"
+            className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 border-none dark:bg-slate-50"
+          />
+          <Button className="dark:bg-slate-900 dark:text-slate-50">
+            Subscribe
+          </Button>
+        </div>
+      </div>
+      <div className="w-full max-w-7xl mx-auto px-6 shadow-sm pt-2 ">
         <div className="grid sm:gap-x-16 sm:grid-cols-2 lg:grid-cols-4 w-full gap-y-8 mx-auto grid-cols-1 py-4">
           {SITEMAP.map(({ title, links }, key) => (
             <FooterList key={key} title={title}>
               {links.map((link, key) => (
-                <Link key={key} to="#">
+                <Link key={key} to="#" className="hover:text-yellow-400">
                   {link}
                 </Link>
               ))}
             </FooterList>
           ))}
         </div>
-        <div className="flex w-full flex-col items-center justify-center border-t border-gray-200 py-2 md:flex-row md:justify-between">
+        <div className="flex w-full flex-col items-center justify-center border-t border-gray-700 py-2 md:flex-row md:justify-between">
           <p>
             &copy; {new Date().getFullYear()} Demo App, Inc. All rights
             reserved.
@@ -70,7 +88,7 @@ interface FooterListProps {
 const FooterList = ({ title, children }: FooterListProps) => {
   return (
     <div className="w-full flex flex-col gap-y-2 items-center sm:items-start ">
-      <h3 className="text-lg font-semibold uppercase">{title}</h3>
+      <h3 className="text-lg font-semibold uppercase ">{title}</h3>
       {children}
     </div>
   );

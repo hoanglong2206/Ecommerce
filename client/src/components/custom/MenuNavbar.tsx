@@ -21,10 +21,12 @@ export default function MenuNavbar({ visible }: MenuNavbarProps) {
   const location = useLocation();
   const { pathname } = location;
   return (
-    <div className="flex items-center gap-x-2">
-      <Menubar className={`${visible ? "hidden xl:flex" : "hidden"}`}>
+    <div className="flex items-center gap-x-4">
+      <Menubar
+        className={`${visible ? "hidden xl:flex" : "hidden"} border-none`}
+      >
         <MenubarMenu>
-          <MenubarTrigger className="flex items-center gap-x-2">
+          <MenubarTrigger className="flex items-center gap-x-2 ">
             <ListCollapse className="w-5 h-5" />
             Shop Categories
           </MenubarTrigger>
@@ -88,17 +90,23 @@ export default function MenuNavbar({ visible }: MenuNavbarProps) {
             <MenubarItem>Smart Phones</MenubarItem>
             <MenubarSeparator />
             <MenubarItem className="p-2">Music & Gaming</MenubarItem>
+            <MenubarSeparator />
+            <MenubarItem className="p-2">Headphones</MenubarItem>
+            <MenubarSeparator />
+            <MenubarItem className="p-2">Accessories</MenubarItem>
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
       <div
-        className={`items-center gap-x-2 px-2 ${
-          visible ? "hidden xl:flex" : "hidden md:flex xl:hidden"
+        className={`items-center gap-x-2 ${
+          visible
+            ? "hidden xl:flex border-l border-slate-200 pl-4"
+            : "hidden md:flex xl:hidden"
         }`}
       >
         <NavLink
           to="/"
-          className={`min-w-[100px] text-center font-medium rounded-md py-2 px-3 text-neutral-900 hover:bg-slate-200 duration-75 ease-in-out ${
+          className={`min-w-[80px] text-center font-medium rounded-md py-2 px-3 text-neutral-900 hover:bg-slate-200 duration-75 ease-in-out ${
             pathname === "/" && "bg-slate-200"
           }`}
         >
@@ -106,7 +114,7 @@ export default function MenuNavbar({ visible }: MenuNavbarProps) {
         </NavLink>
         <NavLink
           to="/shop"
-          className={`min-w-[100px] text-center font-medium rounded-md py-2 px-3 text-neutral-900 hover:bg-slate-200 duration-75 ease-in-out ${
+          className={`min-w-[80px] text-center font-medium rounded-md py-2 px-3 text-neutral-900 hover:bg-slate-200 duration-75 ease-in-out ${
             pathname === "shop" && "bg-slate-200"
           }`}
         >
@@ -114,7 +122,7 @@ export default function MenuNavbar({ visible }: MenuNavbarProps) {
         </NavLink>
         <NavLink
           to="/blog"
-          className={`min-w-[100px] text-center font-medium rounded-md py-2 px-3 text-neutral-900 hover:bg-slate-200 duration-75 ease-in-out ${
+          className={`min-w-[80px] text-center font-medium rounded-md py-2 px-3 text-neutral-900 hover:bg-slate-200 duration-75 ease-in-out ${
             pathname === "blog" && "bg-slate-200"
           }`}
         >

@@ -7,7 +7,7 @@ import {
   brand6,
   brand7,
   brand8,
-} from "@/assets";
+} from "@/assets/brands";
 
 export const brands = [
   {

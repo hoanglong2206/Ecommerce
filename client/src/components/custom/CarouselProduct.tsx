@@ -3,7 +3,6 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { products } from "@/utils/products";
@@ -22,19 +21,12 @@ export default function CarouselProduct({ title }: CarouselProductProps) {
           SEE ALL <ChevronRight className="w-5 h-5 ml-2" />
         </Button>
       </div>
-      <Carousel
-        className="w-full mx-auto"
-        plugins={[
-          Autoplay({
-            delay: 2000,
-          }),
-        ]}
-      >
-        <CarouselContent className="py-2 gap-4">
+      <Carousel className="w-full">
+        <CarouselContent className="py-2">
           {products.map((product, index) => (
             <CarouselItem
               key={index}
-              className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 cursor-pointer p-0"
+              className="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
             >
               <ProductCard data={product} />
             </CarouselItem>

@@ -1,14 +1,16 @@
 export interface Product {
   id: string;
   name: string;
+  brand: string;
+  tags: string[];
   description: string;
   price: number;
-  brand: string;
   category: string;
-  reviews: number;
   rating: number;
   inStock: boolean;
-  images: Image[];
+  size: Size[];
+  imageCover: string;
+  images: string[];
   comments: Comments[];
 }
 
@@ -21,38 +23,20 @@ export interface Comments {
 }
 
 export interface Users {
+  id: string;
   name: string;
   email: string;
-  image: string;
+  photo: string;
   role: string;
 }
 
-export interface Image {
-  color: string;
-  colorCode: string;
-  image: string;
-}
-
-export interface Billboard {
-  id: string;
-  label: string;
-  imageUrl: string;
-}
-
-export interface Category {
-  id: string;
-  name: string;
-  billboard: Billboard;
-}
-
 export interface Size {
-  id: string;
   name: string;
-  value: string;
+  color: Color[];
 }
 
 export interface Color {
-  id: string;
   name: string;
-  value: string;
+  code: string;
+  quantity: number;
 }

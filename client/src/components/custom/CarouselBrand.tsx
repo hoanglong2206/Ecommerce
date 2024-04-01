@@ -21,10 +21,10 @@ const CarouselBrand = () => {
         {brands.map((brand, index) => (
           <CarouselItem
             key={index}
-            className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6 cursor-pointer "
+            className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 cursor-pointer "
           >
             <div className="p-1">
-              <Card className="border-none shadow-lg">
+              <Card className="border-none shadow-md">
                 <CardContent className="flex aspect-square items-center justify-center p-6 ">
                   <img
                     src={brand.image}

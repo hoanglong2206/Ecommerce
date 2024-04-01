@@ -13,16 +13,16 @@ interface ProductCardProps {
 const ProductCard = ({ data }: ProductCardProps) => {
   const navigate: NavigateFunction = useNavigate();
   return (
-    <div className=" bg-slate-50 dark:bg-slate-700 rounded-md p-2 transition text-sm shadow-md space-y-2">
+    <div className=" bg-slate-50 dark:bg-slate-700 rounded-md transition text-sm shadow-md space-y-2">
       <div
         onClick={() => {
           navigate(`/product-detail/${data.id}`);
         }}
         className="relative group w-full cursor-pointer"
       >
-        <div className="aspect-square p-3 overflow-hidden relative w-full">
+        <div className="aspect-square overflow-hidden relative w-full">
           <img
-            src={data.images[0].image}
+            src={data.imageCover}
             alt={data.name}
             className="w-full h-full object-contain"
           />
@@ -38,31 +38,23 @@ const ProductCard = ({ data }: ProductCardProps) => {
           </div>
         </div>
       </div>
-      <div>
-        <p
-          onClick={() => {
-            navigate(`/product-detail/${data.id}`);
-          }}
-          className="font-semibold text-lg hover:text-gray-700 dark:hover:text-gray-300 transition cursor-pointer"
-        >
-          {truncateText(data.name)}
-        </p>
-        <p className="text-sm ">{data.category}</p>
-      </div>
-      <div>
-        <Rating
-          name="rating"
-          value={data.rating}
-          size="small"
-          precision={0.5}
-          readOnly
-        />
-      </div>
-      <div className="flex items-center justify-between">
-        <div className="font-semibold">{formatPrice(data.price)}</div>
-        <Button variant={"ghost"} size={"icon"} className="rounded-full">
-          <Heart className="w-6 h-6" />
-        </Button>
+      <div className="p-4 space-y-2">
+        <div className="space-y-1">
+          <h3 className="text-base font-medium text-slate-700">{data.brand}</h3>
+          <h4 className="text-lg font-semibold cursor-pointer hover:text-slate-700">
+            {truncateText(data.name, 20)}
+          </h4>
+        </div>
+        <Rating name="rating" value={data.rating} precision={0.1} readOnly />
+        <div className="flex items-center justify-between">
+          <span className="text-lg font-semibold text-slate-800">
+            {formatPrice(data.price)}
+          </span>
+
+          <Button variant={"ghost"} size={"icon"} className="rounded-full">
+            <Heart className="h-5 w-5" />
+          </Button>
+        </div>
       </div>
     </div>
   );

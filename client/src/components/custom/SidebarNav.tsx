@@ -2,18 +2,14 @@ import { useRef, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
-  Banknote,
   ChevronLeft,
-  CircleParking,
-  LayoutDashboard,
-  LogOut,
-  MessageSquare,
-  Settings,
-  Shapes,
-  UserRound,
-  UsersRound,
+  Home,
+  ShoppingBag,
+  SquareArrowOutUpRight,
 } from "lucide-react";
+import { Accordion } from "@/components/ui/accordion";
 import { Icons } from "@/utils/icon";
+import { AccordionSidebar } from "@/components";
 
 interface SidebarNavProps {
   sidebarOpen: boolean;
@@ -78,111 +74,82 @@ const SidebarNav = ({ sidebarOpen, setSidebarOpen }: SidebarNavProps) => {
         </Button>
       </div>
       <div className="no-scrollbar flex-1 flex-col overflow-y-auto duration-300 ease-linear">
-        <nav className="py-4 px-3 lg:px-5">
-          <ul className="mt-4 mb-5 flex flex-col gap-2">
+        <nav className="py-4 px-3 lg:px-5 space-y-1">
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionSidebar value="1" title="Cameras & Videos" />
+            <AccordionSidebar value="2" title="Computers & Laptop" />
+          </Accordion>
+          <ul className="flex flex-col gap-1">
             <li>
               <NavLink
-                to="/app/admin"
-                className={`flex items-center gap-2.5 rounded-sm py-1.5 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out  ${
-                  pathname === "/app/admin" && "bg-neutral-500/10"
-                }`}
+                to={"#"}
+                className={`flex items-center rounded-sm py-2 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out `}
               >
-                <LayoutDashboard className="w-5 h-5" />
-                Dashboard
+                Smart Phones
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/app/admin/allotment"
-                className={`flex items-center gap-2.5 rounded-sm py-1.5 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out  ${
-                  pathname.includes("allotment") && "bg-neutral-500/10"
-                }`}
+                to="#"
+                className={`flex items-center rounded-sm py-2 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out`}
               >
-                <CircleParking className="w-5 h-5" />
-                Allotment
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to="/app/admin/user-management"
-                className={`flex items-center gap-2.5 rounded-sm py-1.5 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out  ${
-                  pathname.includes("user-management") && "bg-neutral-500/10"
-                }`}
-              >
-                <UsersRound className="w-5 h-5" />
-                User Management
+                Music & Gaming
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/app/admin/payment"
-                className={`flex items-center gap-2.5 rounded-sm py-1.5 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out  ${
-                  pathname.includes("payment") && "bg-neutral-500/10"
-                }`}
+                to="#"
+                className={`flex items-center rounded-sm py-2 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out`}
               >
-                <Banknote className="w-5 h-5" />
-                Payment
+                Headphones
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/app/admin/equipment"
-                className={`flex items-center gap-2.5 rounded-sm py-1.5 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out  ${
-                  pathname.includes("equipment") && "bg-neutral-500/10"
-                }`}
+                to="#"
+                className={`flex items-center rounded-sm py-2 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out`}
               >
-                <Shapes className="w-5 h-5" />
-                Equipments
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/app/admin/messages"
-                className={`flex items-center gap-2.5 rounded-sm py-1.5 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out  ${
-                  pathname.includes("messages") && "bg-neutral-500/10"
-                }`}
-              >
-                <MessageSquare className="w-5 h-5" />
-                Messages
+                Accessories
               </NavLink>
             </li>
           </ul>
         </nav>
       </div>
       <div className="py-4 px-3 lg:px-5">
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-1">
           <li>
             <NavLink
-              to="/app/admin/profile"
-              className={`flex items-center gap-2.5 rounded-sm py-1.5 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out  ${
-                pathname.includes("profile") && "bg-neutral-500/10"
+              to="/"
+              className={`flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out  ${
+                pathname === "/" && "bg-neutral-500/10"
               }`}
             >
-              <UserRound className="w-5 h-5" />
-              Profile
+              <Home className="w-5 h-5" />
+              Home
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/app/admin/settings"
-              className={`flex items-center gap-2.5 rounded-sm py-1.5 px-4 font-medium hover:bg-neutral-500/10 duration-75 ease-in-out  ${
-                pathname.includes("settings") && "bg-neutral-500/10"
+              to="/shop"
+              className={`flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out  ${
+                pathname.includes("shop") && "bg-neutral-500/10"
               }`}
             >
-              <Settings className="w-5 h-5" />
-              Settings
+              <ShoppingBag className="w-5 h-5" />
+              Store
             </NavLink>
           </li>
+
           <li>
-            <Button
-              className="w-full flex items-center justify-start gap-2.5 rounded-sm py-1.5 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out"
-              variant="ghost"
-              size="sm"
+            <NavLink
+              to="/blog"
+              className={`flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium  hover:bg-neutral-500/10 duration-75 ease-in-out  ${
+                pathname.includes("blog") && "bg-neutral-500/10"
+              }`}
             >
-              <LogOut className="w-5 h-5" />
-              Logout
-            </Button>
+              <SquareArrowOutUpRight className="w-5 h-5" />
+              Blog
+            </NavLink>
           </li>
         </ul>
       </div>

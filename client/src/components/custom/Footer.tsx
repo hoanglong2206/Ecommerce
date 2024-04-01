@@ -24,13 +24,13 @@ const Footer = () => {
     },
   ];
   return (
-    <footer className="relative w-full bg-slate-800 text-white py-4">
-      <div className="w-full flex flex-col md:flex-row items-center justify-center gap-6 px-8 md:px-16 xl:px-32 py-4 border-b border-gray-700">
+    <footer className="relative w-full bg-slate-800 text-white pt-4 pb-2">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-center gap-6 px-8 md:px-16 xl:px-32 py-4 border-b border-gray-700">
         <div className="flex items-center gap-x-4">
           <Send className="w-8 h-8" />
           <h1 className="text-2xl font-semibold">Sign up for our newsletter</h1>
         </div>
-        <div className="flex flex-grow items-center p-1 bg-slate-50 text-gray-800 rounded-lg w-4/5 md:w-auto">
+        <div className="flex flex-grow items-center p-1 bg-slate-50 text-gray-800 rounded-lg md:max-w-[700px] w-4/5 lg:w-auto">
           <Input
             type="email"
             placeholder="Enter your email"
@@ -41,12 +41,16 @@ const Footer = () => {
           </Button>
         </div>
       </div>
-      <div className="w-full max-w-7xl mx-auto px-6 shadow-sm pt-2 ">
+      <div className="w-full max-w-7xl mx-auto px-6 pt-2 ">
         <div className="grid sm:gap-x-16 sm:grid-cols-2 lg:grid-cols-4 w-full gap-y-8 mx-auto grid-cols-1 py-4">
           {SITEMAP.map(({ title, links }, key) => (
             <FooterList key={key} title={title}>
               {links.map((link, key) => (
-                <Link key={key} to="#" className="hover:text-yellow-400">
+                <Link
+                  key={key}
+                  to="#"
+                  className="hover:text-slate-500 font-medium  tracking-wider"
+                >
                   {link}
                 </Link>
               ))}
@@ -58,7 +62,7 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} Demo App, Inc. All rights
             reserved.
           </p>
-          <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
+          <div className="flex gap-4 sm:justify-center">
             <LinkButton to="#">
               <FaFacebook className="h-5 w-5" />
             </LinkButton>
@@ -88,7 +92,9 @@ interface FooterListProps {
 const FooterList = ({ title, children }: FooterListProps) => {
   return (
     <div className="w-full flex flex-col gap-y-2 items-center sm:items-start ">
-      <h3 className="text-lg font-semibold uppercase ">{title}</h3>
+      <h3 className="text-lg font-semibold uppercase tracking-widest">
+        {title}
+      </h3>
       {children}
     </div>
   );
@@ -102,7 +108,11 @@ interface LinkButtonProps {
 const LinkButton = ({ to, children }: LinkButtonProps) => {
   return (
     <Link to={to}>
-      <Button variant={"ghost"} size={"icon"} className="rounded-full">
+      <Button
+        variant={"ghost"}
+        size={"icon"}
+        className="rounded-full transition duration-300 "
+      >
         {children}
       </Button>
     </Link>

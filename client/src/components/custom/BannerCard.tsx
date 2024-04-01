@@ -35,7 +35,9 @@ const BannerCard = ({
           </h3>
           <h4
             className={`${
-              isButton ? "text-2xl  sm:text-4xl " : "text-xl sm:text-2xl "
+              isButton
+                ? "text-2xl md:text-4xl lg:text-3xl xl:text-4xl "
+                : "text-xl sm:text-2xl "
             } tracking-wide font-bold
           }`}
           >

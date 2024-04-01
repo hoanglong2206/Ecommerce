@@ -9,9 +9,9 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/product-detail/:id" element={<ProductDetail />} />
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/register" element={<Register />} />
       </Route>
-      <Route path="/auth/login" element={<Login />} />
-      <Route path="/auth/register" element={<Register />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

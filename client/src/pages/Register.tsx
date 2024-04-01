@@ -58,8 +58,8 @@ const Register = () => {
     }
   };
   return (
-    <div className="w-full absolute flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
-      <Card className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="w-full flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
+      <Card className="sm:mx-auto sm:w-full sm:max-w-md">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">
             <Icons.logo className="mx-auto w-12" />

@@ -18,7 +18,7 @@ const NotFound = () => {
         </div>
         <div className="text-center -mt-[108px]">
           <h3 className="text-3xl">Look like you're lost</h3>
-          <Button onClick={() => navigate(-1)} className="mt-4">
+          <Button onClick={() => navigate("/")} className="mt-4">
             Go back home
           </Button>
         </div>

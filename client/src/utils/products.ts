@@ -36,6 +36,11 @@ export const products = [
             code: "#ffffff",
             quantity: 5,
           },
+          {
+            name: "Red",
+            code: "#ff0000",
+            quantity: 5,
+          },
         ],
       },
       {
@@ -56,7 +61,37 @@ export const products = [
     ],
     imageCover: camera,
     images: [camera, camera, camera],
-    comments: [],
+    comments: [
+      {
+        id: "64a654593e91b8e73a351e9c",
+        comment: "This is a great camera!",
+        rating: 4,
+        createdDate: "2021-10-10T10:00:00",
+        user: {
+          id: "64a654593e91b8e73a351e9c",
+          name: "John Doe",
+          email: "johndoe@test.com",
+          gender: "male",
+          photo: "https://xsgames.co/randomusers/avatar.php?g=male",
+          role: "user",
+        },
+        likes: 10,
+      },
+      {
+        id: "64a654593e91b8e73a351e9d",
+        comment: "Amazing camera! I love it!",
+        rating: 5,
+        createdDate: "2021-10-10T10:00:00",
+        user: {
+          id: "64a654593e91b8e73a351e9d",
+          name: "Jane Doe",
+          email: "janedoe@test.com",
+          gender: "female",
+          photo: "https://xsgames.co/randomusers/avatar.php?g=female",
+        },
+        likes: 20,
+      },
+    ],
   },
   {
     id: "64a654593e91b8e73a351e9d",

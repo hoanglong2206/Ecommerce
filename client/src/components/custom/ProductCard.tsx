@@ -14,13 +14,13 @@ const ProductCard = ({ data }: ProductCardProps) => {
   const navigate: NavigateFunction = useNavigate();
   return (
     <div className=" bg-slate-50 dark:bg-slate-700 rounded-md transition text-sm shadow-md space-y-2">
-      <div
-        onClick={() => {
-          navigate(`/product-detail/${data.id}`);
-        }}
-        className="relative group w-full cursor-pointer"
-      >
-        <div className="aspect-square overflow-hidden relative w-full">
+      <div className="relative group w-full cursor-pointer">
+        <div
+          onClick={() => {
+            navigate(`/product-detail/${data.id}`);
+          }}
+          className="aspect-square overflow-hidden relative w-full"
+        >
           <img
             src={data.imageCover}
             alt={data.name}
@@ -41,8 +41,13 @@ const ProductCard = ({ data }: ProductCardProps) => {
       <div className="p-4 space-y-2">
         <div className="space-y-1">
           <h3 className="text-base font-medium text-slate-700">{data.brand}</h3>
-          <h4 className="text-lg font-semibold cursor-pointer hover:text-slate-700">
-            {truncateText(data.name, 20)}
+          <h4
+            onClick={() => {
+              navigate(`/product-detail/${data.id}`);
+            }}
+            className="text-lg font-semibold cursor-pointer hover:text-slate-700"
+          >
+            {truncateText(data.name, 18)}
           </h4>
         </div>
         <Rating name="rating" value={data.rating} precision={0.1} readOnly />

@@ -22,6 +22,7 @@ export { default as ProductCard } from "./custom/ProductCard";
 export { default as ProductInfo } from "./custom/ProductInfo";
 export { default as ProductImages } from "./custom/ProductImages";
 export { default as ProductReviews } from "./custom/ProductReviews";
+export { default as ProductNotFound } from "./custom/ProductNotFound";
 
 export { default as CartClient } from "./custom/CartClient";
 export { default as CartItem } from "./custom/CartItem";

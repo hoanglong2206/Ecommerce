@@ -20,12 +20,14 @@ export interface Comments {
   rating: number;
   createdDate: string;
   user: Users;
+  likes: number;
 }
 
 export interface Users {
   id: string;
   name: string;
   email: string;
+  gender: string;
   photo: string;
   role: string;
 }

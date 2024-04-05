@@ -68,7 +68,7 @@ const SidebarNav = ({ sidebarOpen, setSidebarOpen }: SidebarNavProps) => {
           onClick={() => setSidebarOpen(!sidebarOpen)}
           size="icon"
           variant="ghost"
-          className="flex items-center justify-center lg:hidden"
+          className="flex items-center justify-center xl:hidden"
         >
           <ChevronLeft className="h-6 w-6" />
         </Button>

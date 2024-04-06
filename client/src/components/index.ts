@@ -27,7 +27,9 @@ export { default as ProductPreviewModal } from "./custom/ProductPreviewModal";
 export { default as ProductNotFound } from "./custom/ProductNotFound";
 
 export { default as CartClient } from "./custom/CartClient";
+export { default as CartList } from "./custom/CartList";
 export { default as CartItem } from "./custom/CartItem";
+export { default as CartCheckout } from "./custom/CartCheckout";
 
 export { default as HoverCart } from "./custom/HoverCart";
 export { default as HoverNotification } from "./custom/HoverNotification";

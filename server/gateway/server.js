@@ -1,14 +1,20 @@
-import { winstonLogger } from "./utils/logger";
-import cookieSession from "cookie-session";
-import helmet from "helmet";
-import cors from "cors";
-import compression from "compression";
-import { json, urlencoded } from "express";
+const express = require("express");
+const cookieSession = require("cookie-session");
+const helmet = require("helmet");
+const cors = require("cors");
+const compression = require("compression");
+const http = require("http");
+const winstonLogger = require("./utils/logger");
+const { StatusCodes } = require("http-status-codes");
+const CustomError = require("./utils/error-handler");
+const config = require("./config");
+const ElasticSearch = require("./elasticsearch");
+const appRoutes = require("./routes");
 
 const SERVER_PORT = 4000;
-const log = winstonLogger("", "gateway", "debug");
+const log = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, "gateway", "debug");
 
-export class GatewayServer {
+class GatewayServer {
   constructor(app) {
     this.app = app;
   }
@@ -18,6 +24,8 @@ export class GatewayServer {
     this.standardMiddleware(this.app);
     this.routesMiddleware(this.app);
     this.startElasticsearch();
+    this.errorHandler(this.app);
+    this.startServer(this.app);
   }
 
   securityMiddleware(app) {
@@ -25,15 +33,17 @@ export class GatewayServer {
     app.use(
       cookieSession({
         name: "session",
-        keys: [],
+        keys: [`${config.SECRET_KEY_ONE}`, `${config.SECRET_KEY_TWO}`],
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        secure: false,
+        secure: config.NODE_ENV !== "development",
+        // ...(config.NODE_ENV !== "development" && { sameSite: "none" }),
+        // sameSite: "none",
       })
     );
     app.use(helmet());
     app.use(
       cors({
-        origin: "",
+        origin: config.CLIENT_URL,
         credential: true,
         method: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       })
@@ -41,20 +51,56 @@ export class GatewayServer {
   }
   standardMiddleware(app) {
     app.use(compression());
-    app.use(json({ limit: "200mb" }));
-    app.use(urlencoded({ extended: true, limit: "200mb" }));
+    app.use(express.json({ limit: "200mb" }));
+    app.use(express.urlencoded({ extended: true, limit: "200mb" }));
   }
 
-  routesMiddleware(app) {}
+  routesMiddleware(app) {
+    appRoutes(app);
+  }
 
-  startElasticsearch() {}
+  startElasticsearch() {
+    ElasticSearch.checkConnection();
+  }
 
   errorHandler(app) {
     app.use("*", (req, res, next) => {
       const fullUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
+      log.log("error", `${fullUrl} does not exist`);
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "The endpoint does not exist." });
+      next();
     });
-    log.log("error", `${fullUrl} does not exist`);
-    res.status(404).json({ message: "The endpoint does not exist." });
-    next();
+
+    app.use((err, _req, res, next) => {
+      if (err instanceof CustomError) {
+        log.log("error", `GatewayService ${err.comingFrom}:`, err);
+        res.status(err.statusCode).json(err.serializeErrors());
+      }
+      next();
+    });
+  }
+
+  async startServer(app) {
+    try {
+      const httpServer = new http.Server(app);
+      this.startHttpServer(httpServer);
+    } catch (error) {
+      log.log("error", `GatewayService startServer() error method:`, error);
+    }
+  }
+
+  async startHttpServer(http) {
+    try {
+      log.info(`Starting Gateway Server starts with process id ${process.pid}`);
+      http.listen(SERVER_PORT, () => {
+        log.info(`Gateway Server is running on port ${SERVER_PORT}`);
+      });
+    } catch (error) {
+      log.log("error", `GatewayService startHttpServer() error method:`, error);
+    }
   }
 }
+
+module.exports = GatewayServer;

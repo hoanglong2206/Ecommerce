@@ -1,14 +1,14 @@
-import winston from "winston";
-import {
+const winston = require("winston");
+const {
   ElasticsearchTransformer,
   ElasticsearchTransport,
-} from "winston-elasticsearch";
+} = require("winston-elasticsearch");
 
 const esTransformer = (logData) => {
   return ElasticsearchTransformer(logData);
 };
 
-export const winstonLogger = (elasticsearchNode, name, level) => {
+module.exports = (elasticsearchNode, name, level) => {
   const options = {
     console: {
       level,

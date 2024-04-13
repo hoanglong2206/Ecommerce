@@ -10,6 +10,7 @@ const CustomError = require("./utils/error-handler");
 const config = require("./config");
 const ElasticSearch = require("./elasticsearch");
 const appRoutes = require("./routes");
+const { axiosAuthInstance } = require("./services/api/auth.service");
 
 const SERVER_PORT = 4000;
 const log = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, "gateway", "debug");
@@ -48,6 +49,15 @@ class GatewayServer {
         method: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       })
     );
+
+    app.use((req, _res, next) => {
+      if (req.session?.jwt) {
+        axiosAuthInstance.defaults.headers[
+          "Authorization"
+        ] = `Bearer ${req.session?.jwt}`;
+      }
+      next();
+    });
   }
   standardMiddleware(app) {
     app.use(compression());

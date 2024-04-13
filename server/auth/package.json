@@ -23,6 +23,7 @@
     "http-status-codes": "^2.3.0",
     "joi": "^17.12.3",
     "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
     "mysql2": "^3.9.4",
     "sequelize": "^6.37.2",
     "uuid": "^9.0.1",

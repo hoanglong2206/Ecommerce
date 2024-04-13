@@ -7,6 +7,9 @@ const cors = require("cors");
 const { verify } = require("jsonwebtoken");
 const compression = require("compression");
 const { checkConnection } = require("./elasticsearch");
+const { createConnection } = require("./queues/connection");
+
+let authChannel;
 
 const SERVER_PORT = 4002;
 const log = winstonLogger(
@@ -53,7 +56,9 @@ function standardMiddleware(app) {
 
 function routesMiddleware(app) {}
 
-async function startQueues() {}
+async function startQueues() {
+  authChannel = await createConnection();
+}
 
 function startElasticsearch() {
   checkConnection();
@@ -83,4 +88,4 @@ function startServer(app) {
   }
 }
 
-module.exports = { start };
+module.exports = { start, authChannel };

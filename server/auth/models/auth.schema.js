@@ -41,6 +41,35 @@ const AuthModel = sequelize.define(
       allowNull: false,
       defaultValue: new Date(),
     },
+    emailVerificationToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    emailVerified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    otp: {
+      type: DataTypes.STRING,
+    },
+    otpExpiration: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: new Date(),
+    },
+    browserName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    deviceType: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    createAt: {
+      type: DataTypes.DATE,
+      defaultValue: Date.now(),
+    },
   },
   {
     indexes: [
@@ -51,6 +80,10 @@ const AuthModel = sequelize.define(
       {
         unique: true,
         fields: ["username"],
+      },
+      {
+        unique: true,
+        fields: ["emailVerificationToken"],
       },
     ],
   }

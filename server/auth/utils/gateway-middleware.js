@@ -1,5 +1,5 @@
 const JWT = require("jsonwebtoken");
-const { NotAuthorizedError } = require("../utils/error-handler");
+const { NotAuthorizedError } = require("./error-handler");
 const config = require("../config");
 
 const tokens = [

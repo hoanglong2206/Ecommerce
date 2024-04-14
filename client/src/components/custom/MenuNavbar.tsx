@@ -115,7 +115,7 @@ export default function MenuNavbar({ visible }: MenuNavbarProps) {
         <NavLink
           to="/shop"
           className={`min-w-[80px] text-center font-medium rounded-md py-2 px-3 text-neutral-900 hover:bg-slate-200 duration-75 ease-in-out ${
-            pathname === "shop" && "bg-slate-200"
+            pathname.includes("shop") && "bg-slate-200"
           }`}
         >
           Shop
@@ -123,7 +123,7 @@ export default function MenuNavbar({ visible }: MenuNavbarProps) {
         <NavLink
           to="/blog"
           className={`min-w-[80px] text-center font-medium rounded-md py-2 px-3 text-neutral-900 hover:bg-slate-200 duration-75 ease-in-out ${
-            pathname === "blog" && "bg-slate-200"
+            pathname.includes("blog") && "bg-slate-200"
           }`}
         >
           Blog

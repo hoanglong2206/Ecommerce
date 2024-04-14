@@ -9,8 +9,9 @@ import {
   tab2,
   tab3,
 } from "@/assets/shoppings";
+import { Product } from "@/interfaces";
 
-export const products = [
+export const products: Product[] = [
   {
     id: "64a654593e91b8e73a351e9b",
     name: "Olympus Pen E-PL9 Kit With 14-42, EZ Lens, Camera",
@@ -88,6 +89,7 @@ export const products = [
           email: "janedoe@test.com",
           gender: "female",
           photo: "https://xsgames.co/randomusers/avatar.php?g=female",
+          role: "user",
         },
         likes: 20,
       },

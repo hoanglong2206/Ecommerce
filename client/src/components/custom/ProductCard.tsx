@@ -5,11 +5,13 @@ import Rating from "@mui/material/Rating";
 import { Button } from "../ui/button";
 import { useNavigate, NavigateFunction } from "react-router-dom";
 import { Expand, ShoppingCart } from "lucide-react";
-import ProductPreviewModal from "./ProductPreviewModal";
 import { useState } from "react";
-import ProductImages from "./ProductImages";
-import ProductAction from "./ProductAction";
 import { CartProductType } from "./ProductInfo";
+import {
+  ProductImages,
+  ProductAction,
+  ProductPreviewModal,
+} from "@/components";
 
 interface ProductCardProps {
   data: Product;

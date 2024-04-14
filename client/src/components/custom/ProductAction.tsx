@@ -53,7 +53,7 @@ const ProductAction = ({
               />
               <Label
                 htmlFor={size.name}
-                className="flex w-9 h-9 items-center justify-center rounded-md border-2 border-muted bg-popover p-2 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-teal-400 [&:has([data-state=checked])]:border-teal-400"
+                className="flex w-9 h-9 items-center justify-center rounded-md border-2 border-muted bg-popover p-2 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-teal-400 [&:has([data-state=checked])]:border-teal-400 cursor-pointer"
               >
                 {size.name}
               </Label>
@@ -85,7 +85,7 @@ const ProductAction = ({
                 />
                 <Label
                   htmlFor={color.name}
-                  className="flex w-9 h-9 items-center justify-center rounded-md border-2 border-muted bg-popover p-2 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-teal-400 [&:has([data-state=checked])]:border-teal-400"
+                  className="flex w-9 h-9 items-center justify-center rounded-md border-2 border-muted bg-popover p-2 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-teal-400 [&:has([data-state=checked])]:border-teal-400 cursor-pointer"
                   style={{ backgroundColor: color.code }}
                 ></Label>
               </div>

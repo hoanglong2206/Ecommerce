@@ -23,6 +23,18 @@ const SidebarNav = ({ sidebarOpen, setSidebarOpen }: SidebarNavProps) => {
   const trigger = useRef<any>(null);
   const sidebar = useRef<any>(null);
 
+  const handleResize = () => {
+    if (window.innerWidth > 1280) {
+      // Adjust this value as needed for your breakpoint
+      setSidebarOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!sidebar.current || !trigger.current) return;

@@ -61,10 +61,12 @@ const AuthModel = sequelize.define(
     browserName: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: "unknown",
     },
     deviceType: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: "unknown",
     },
     createAt: {
       type: DataTypes.DATE,

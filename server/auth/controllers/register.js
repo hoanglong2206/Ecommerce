@@ -1,9 +1,9 @@
 const { StatusCodes } = require("http-status-codes");
 const crypto = require("crypto");
-const config = require("../config");
-const { v4 } = require("uuid");
-const { authChannel } = require("../server");
-const { publishDirectMessage } = require("../queues/auth.producer");
+// const config = require("../config");
+// const { v4 } = require("uuid");
+// const { authChannel } = require("../server");
+// const { publishDirectMessage } = require("../queues/auth.producer");
 const { firstLetterUppercase, lowerCase } = require("../utils/helper");
 const registerSchema = require("../schemes/register");
 const { BadRequestError } = require("../utils/error-handler");
@@ -20,7 +20,7 @@ async function register(req, res) {
     throw new BadRequestError(error.details[0].message, "Register error");
   }
 
-  const { username, email, password, browserName, deviceType } = req.body;
+  const { username, email, password } = req.body;
   const checkUser = await getUserByUsernameOrEmail(username, email);
 
   if (checkUser) {
@@ -36,8 +36,6 @@ async function register(req, res) {
     email: lowerCase(email),
     password,
     emailVerificationToken: randomChars,
-    browserName,
-    deviceType,
   };
 
   const result = await createAuthUser(authData);
@@ -60,7 +58,7 @@ async function register(req, res) {
   const userJWT = signToken(result.id, result.email, result.username);
   res.status(StatusCodes.CREATED).json({
     message: "User created successfully",
-    data: result,
+    user: result,
     token: userJWT,
   });
 }

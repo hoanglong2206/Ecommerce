@@ -14,13 +14,13 @@ const tokens = [
 ];
 
 function verifyGatewayRequest(req, _res, next) {
-  if (!req.headers?.gatewayToken) {
+  if (!req.headers?.gatewaytoken) {
     throw new NotAuthorizedError(
       "Invalid request",
       "verifyGatewayRequest() method: Request not coming from api gateway"
     );
   }
-  const token = req.headers?.gatewayToken;
+  const token = req.headers?.gatewaytoken;
   if (!token) {
     throw new NotAuthorizedError(
       "Invalid request",

@@ -1,11 +1,11 @@
 const joi = require("joi");
 
 const registerSchema = joi.object().keys({
-  username: joi.string().min(4).max(12).required().messages({
+  username: joi.string().min(4).max(20).required().messages({
     "string.base": "Username must be a string",
     "string.empty": "Username is a required field",
     "string.min": "Username must be at least 4 characters long",
-    "string.max": "Username must be at most 12 characters long",
+    "string.max": "Username must be at most 20 characters long",
   }),
   email: joi.string().email().required().messages({
     "string.base": "Email must be of type string",

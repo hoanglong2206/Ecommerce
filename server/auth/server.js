@@ -8,6 +8,8 @@ const { verify } = require("jsonwebtoken");
 const compression = require("compression");
 const { checkConnection } = require("./elasticsearch");
 const { createConnection } = require("./queues/connection");
+const appRoutes = require("./routes");
+const { CustomError } = require("./utils/error-handler");
 
 let authChannel;
 
@@ -54,7 +56,9 @@ function standardMiddleware(app) {
   app.use(express.urlencoded({ extended: true, limit: "200mb" }));
 }
 
-function routesMiddleware(app) {}
+function routesMiddleware(app) {
+  appRoutes(app);
+}
 
 async function startQueues() {
   authChannel = await createConnection();

@@ -68,7 +68,7 @@ const AuthModel = sequelize.define(
     },
     createAt: {
       type: DataTypes.DATE,
-      defaultValue: Date.now(),
+      defaultValue: DataTypes.NOW,
     },
   },
   {

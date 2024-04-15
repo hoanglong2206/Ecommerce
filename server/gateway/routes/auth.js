@@ -11,3 +11,5 @@ class AuthRoute {
     return this.router;
   }
 }
+
+module.exports = new AuthRoute();

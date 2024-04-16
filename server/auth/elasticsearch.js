@@ -27,4 +27,4 @@ async function checkConnection() {
   }
 }
 
-module.exports = { checkConnection };
+module.exports = { checkConnection, elasticClient };

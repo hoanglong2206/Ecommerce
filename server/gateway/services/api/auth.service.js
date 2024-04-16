@@ -13,7 +13,7 @@ class AuthService {
   }
 
   async getCurrentUser() {
-    const response = await axiosAuthInstance.get("/currentUser");
+    const response = await axiosAuthInstance.get("/current-user");
     return response;
   }
 
@@ -70,15 +70,19 @@ class AuthService {
     return response;
   }
 
-  // async getProducts(query, from, size, type) {
-  //   const response = await this.axiosService.axios.get(`/search/product/${from}/${size}/${type}?${query}`);
-  //   return response;
-  // }
+  async getProducts(query, from, size, type) {
+    const response = await this.axiosService.axios.get(
+      `/search/product/${from}/${size}/${type}?${query}`
+    );
+    return response;
+  }
 
-  // async getProduct(productId) {
-  //   const response = await this.axiosService.axios.get(`/search/product/${productId}`);
-  //   return response;
-  // }
+  async getProduct(productId) {
+    const response = await this.axiosService.axios.get(
+      `/search/product/${productId}`
+    );
+    return response;
+  }
 
   // async seed(count) {
   //   const response = await this.axiosService.axios.put(`/seed/${count}`);

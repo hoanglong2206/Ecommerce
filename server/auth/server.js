@@ -3,13 +3,14 @@ const winstonLogger = require("./utils/logger");
 const config = require("./config");
 const express = require("express");
 const helmet = require("helmet");
+const hpp = require("hpp");
 const cors = require("cors");
 const { verify } = require("jsonwebtoken");
 const compression = require("compression");
 const { checkConnection } = require("./elasticsearch");
+const { StatusCodes } = require("http-status-codes");
 const { createConnection } = require("./queues/connection");
 const appRoutes = require("./routes");
-const { CustomError } = require("./utils/error-handler");
 
 let authChannel;
 
@@ -32,6 +33,7 @@ function start(app) {
 
 function securityMiddleware(app) {
   app.set("trust proxy", 1);
+  app.use(hpp());
   app.use(helmet());
   app.use(
     cors({
@@ -70,10 +72,10 @@ function startElasticsearch() {
 
 function authErrorHandler(app) {
   app.use((error, _req, res, next) => {
-    log.log("error", `AuthService ${error.comingFrom}:`, error);
-    if (error instanceof CustomError) {
-      res.status(error.statusCode).json(error.serializeErrors());
-    }
+    log.log("error", error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: error.message });
     next();
   });
 }

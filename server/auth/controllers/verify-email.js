@@ -1,5 +1,4 @@
 const { StatusCodes } = require("http-status-codes");
-const { BadRequestError } = require("../utils/error-handler");
 const {
   getAuthUserByVerificationToken,
   updateVerifyEmailField,
@@ -11,10 +10,9 @@ async function verifyEmail(req, res) {
   const checkUser = await getAuthUserByVerificationToken(token);
 
   if (!checkUser) {
-    throw new BadRequestError(
-      "Verification token is either invalid or is already used.",
-      "Verify email error"
-    );
+    return res.status(StatusCodes.NOT_FOUND).json({
+      message: "Invalid verification token",
+    });
   }
 
   await updateVerifyEmailField(checkUser.id, 1);

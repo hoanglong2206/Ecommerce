@@ -6,7 +6,6 @@ const crypto = require("crypto");
 // const { publishDirectMessage } = require("../queues/auth.producer");
 const { firstLetterUppercase, lowerCase } = require("../utils/helper");
 const registerSchema = require("../schemes/register");
-const { BadRequestError } = require("../utils/error-handler");
 const {
   createAuthUser,
   getUserByUsernameOrEmail,
@@ -17,17 +16,18 @@ async function register(req, res) {
   const { error } = await Promise.resolve(registerSchema.validate(req.body));
 
   if (error?.details) {
-    throw new BadRequestError(error.details[0].message, "Register error");
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: error.details[0].message,
+    });
   }
 
-  const { username, email, password } = req.body;
+  const { username, email, password, confirmPassword } = req.body;
   const checkUser = await getUserByUsernameOrEmail(username, email);
 
   if (checkUser) {
-    throw new BadRequestError(
-      "Invalid credentials. Email or Username",
-      "Register error"
-    );
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "User already exists",
+    });
   }
   const randomBytes = await Promise.resolve(crypto.randomBytes(20));
   const randomChars = randomBytes.toString("hex");
@@ -35,6 +35,7 @@ async function register(req, res) {
     username: firstLetterUppercase(username),
     email: lowerCase(email),
     password,
+    confirmPassword,
     emailVerificationToken: randomChars,
   };
 

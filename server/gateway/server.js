@@ -4,9 +4,9 @@ const helmet = require("helmet");
 const cors = require("cors");
 const compression = require("compression");
 const http = require("http");
+const hpp = require("hpp");
 const winstonLogger = require("./utils/logger");
 const { StatusCodes } = require("http-status-codes");
-const CustomError = require("./utils/error-handler");
 const config = require("./config");
 const ElasticSearch = require("./elasticsearch");
 const appRoutes = require("./routes");
@@ -41,6 +41,7 @@ class GatewayServer {
         // sameSite: "none",
       })
     );
+    app.use(hpp());
     app.use(helmet());
     app.use(
       cors({
@@ -84,10 +85,10 @@ class GatewayServer {
     });
 
     app.use((err, _req, res, next) => {
-      if (err instanceof CustomError) {
-        log.log("error", `GatewayService ${err.comingFrom}:`, err);
-        res.status(err.statusCode).json(err.serializeErrors());
-      }
+      log.log("error", err);
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: err.message });
       next();
     });
   }

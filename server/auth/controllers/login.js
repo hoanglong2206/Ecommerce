@@ -1,7 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const crypto = require("crypto");
 const loginSchema = require("../schemes/login");
-const { BadRequestError } = require("../utils/error-handler");
 const { getUserByEmail, signToken } = require("../services/auth.service");
 const AuthModel = require("../models/auth.schema");
 const { omit } = require("lodash");
@@ -10,7 +9,9 @@ async function login(req, res) {
   const { error } = await Promise.resolve(loginSchema.validate(req.body));
 
   if (error?.details) {
-    throw new BadRequestError(error.details[0].message, "Login error");
+    return res.status(StatusCodes.OK).json({
+      message: error.details[0].message,
+    });
   }
 
   const { email, password } = req.body;
@@ -18,7 +19,9 @@ async function login(req, res) {
   const existingUser = await getUserByEmail(email);
 
   if (!existingUser) {
-    throw new BadRequestError("Invalid credentials. Email", "Login error");
+    return res.status(StatusCodes.OK).json({
+      message: "User not found",
+    });
   }
 
   const passwordMatch = await AuthModel.prototype.comparePassword(
@@ -27,7 +30,9 @@ async function login(req, res) {
   );
 
   if (!passwordMatch) {
-    throw new BadRequestError("Invalid credentials. Password", "Login error");
+    return res.status(StatusCodes.OK).json({
+      message: "Invalid credentials",
+    });
   }
 
   const userJWT = signToken(

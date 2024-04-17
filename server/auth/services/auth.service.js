@@ -185,20 +185,12 @@ async function updatePassword(authId, password) {
   }
 }
 
-async function updateUserOTP(
-  authId,
-  otp,
-  otpExpiration,
-  browserName,
-  deviceType
-) {
+async function updateUserOTP(authId, otp, otpExpiration) {
   try {
     await AuthModel.update(
       {
         otp,
         otpExpiration,
-        ...(browserName.length > 0 && { browserName }),
-        ...(deviceType.length > 0 && { deviceType }),
       },
       { where: { id: authId } }
     );

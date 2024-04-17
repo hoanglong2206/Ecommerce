@@ -1,37 +1,24 @@
 const config = require("../config");
 const { verify } = require("jsonwebtoken");
-const {
-  NotAuthorizedError,
-  BadRequestError,
-} = require("../utils/error-handler");
 
 class AuthMiddleware {
   verifyUser(req, _res, next) {
     if (!req.session?.jwt) {
-      throw new NotAuthorizedError(
-        "Token is not available. Please login again.",
-        "GatewayService verifyUser() method error"
-      );
+      return next(new Error("Token is not available. Please login again."));
     }
 
     try {
       const payload = verify(req.session?.jwt, `${config.JWT_TOKEN}`);
       req.currentUser = payload;
     } catch (error) {
-      throw new NotAuthorizedError(
-        "Token is not available. Please login again.",
-        "GatewayService verifyUser() method invalid session error"
-      );
+      return next(new Error("Token is not available. Please login again."));
     }
     next();
   }
 
   checkAuthentication(req, _res, next) {
     if (!req.currentUser) {
-      throw new BadRequestError(
-        "Authentication is required to access this route.",
-        "GatewayService checkAuthentication() method error"
-      );
+      return next(new Error("You are not authenticated."));
     }
     next();
   }

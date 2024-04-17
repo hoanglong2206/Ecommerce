@@ -2,7 +2,7 @@ const crypto = require("crypto");
 // const config = require("../config");
 // const { authChannel } = require("../server");
 // const { publishDirectMessage } = require("../queues/auth.producer");
-const { BadRequestError } = require("../utils/error-handler");
+
 const AuthModel = require("../models/auth.schema");
 const { StatusCodes } = require("http-status-codes");
 const {
@@ -21,19 +21,17 @@ const {
 async function forgotPassword(req, res) {
   const { error } = await Promise.resolve(emailSchema.validate(req.body));
   if (error?.details) {
-    throw new BadRequestError(
-      error.details[0].message,
-      "Forgot password error"
-    );
+    return res.status(StatusCodes.OK).json({
+      message: error.details[0].message,
+    });
   }
 
   const { email } = req.body;
   const existingUser = await getUserByEmail(email);
   if (!existingUser) {
-    throw new BadRequestError(
-      "User with this email does not exist",
-      "Forgot password error"
-    );
+    return res.status(StatusCodes.OK).json({
+      message: "User not found",
+    });
   }
 
   const randomBytes = await Promise.resolve(crypto.randomBytes(20));
@@ -63,26 +61,23 @@ async function forgotPassword(req, res) {
 async function resetPassword(req, res) {
   const { error } = await Promise.resolve(passwordSchema.validate(req.body));
   if (error?.details) {
-    throw new BadRequestError(
-      error.details[0].message,
-      "Password resetPassword() method error"
-    );
+    return res.status(StatusCodes.OK).json({
+      message: error.details[0].message,
+    });
   }
   const { password, confirmPassword } = req.body;
   const { token } = req.params;
   if (password !== confirmPassword) {
-    throw new BadRequestError(
-      "Passwords do not match",
-      "Password resetPassword() method error"
-    );
+    return res.status(StatusCodes.OK).json({
+      message: "Passwords do not match",
+    });
   }
 
   const existingUser = await getAuthUserByPasswordToken(token);
   if (!existingUser) {
-    throw new BadRequestError(
-      "Reset token has expired",
-      "Password resetPassword() method error"
-    );
+    return res.status(StatusCodes.OK).json({
+      message: "Invalid token",
+    });
   }
   const hashedPassword = await AuthModel.prototype.hashPassword(password);
   await updatePassword(existingUser.id, hashedPassword);
@@ -108,19 +103,17 @@ async function changePassword(req, res) {
     changePasswordSchema.validate(req.body)
   );
   if (error?.details) {
-    throw new BadRequestError(
-      error.details[0].message,
-      "Password changePassword() method error"
-    );
+    return res.status(StatusCodes.OK).json({
+      message: error.details[0].message,
+    });
   }
   const { newPassword } = req.body;
 
   const existingUser = await getUserByUsername(`${req.currentUser?.username}`);
   if (!existingUser) {
-    throw new BadRequestError(
-      "Invalid password",
-      "Password changePassword() method error"
-    );
+    return res.status(StatusCodes.OK).json({
+      message: "User not found",
+    });
   }
   const hashedPassword = await AuthModel.prototype.hashPassword(newPassword);
   await updatePassword(existingUser.id, hashedPassword);

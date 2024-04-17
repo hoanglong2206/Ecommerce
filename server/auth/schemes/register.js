@@ -18,8 +18,10 @@ const registerSchema = joi.object().keys({
     "string.max": "Invalid password",
     "string.empty": "Password is a required field",
   }),
-  browserName: joi.string().optional(),
-  deviceType: joi.string().optional(),
+  confirmPassword: joi.string().required().valid(joi.ref("password")).messages({
+    "any.only": "Passwords should match",
+    "any.required": "Confirm password is a required field",
+  }),
 });
 
 module.exports = registerSchema;

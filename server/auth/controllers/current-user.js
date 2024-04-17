@@ -3,7 +3,6 @@ const crypto = require("crypto");
 // const { authChannel } = require("../server");
 // const { publishDirectMessage } = require("../queues/auth.producer");
 const { StatusCodes } = require("http-status-codes");
-const { BadRequestError } = require("../utils/error-handler");
 const {
   getAuthUserById,
   getUserByEmail,
@@ -26,10 +25,9 @@ async function resendEmail(req, res) {
   const { email, userId } = req.body;
   const checkIfUserExist = await getUserByEmail(lowerCase(email));
   if (!checkIfUserExist) {
-    throw new BadRequestError(
-      "Email is invalid",
-      "CurrentUser resentEmail() method error"
-    );
+    return res.status(StatusCodes.OK).json({
+      message: "User not found",
+    });
   }
   const randomBytes = await Promise.resolve(crypto.randomBytes(20));
   const randomCharacters = randomBytes.toString("hex");

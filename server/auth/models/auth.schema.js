@@ -19,6 +19,10 @@ const AuthModel = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    confirmPassword: {
+      type: DataTypes.VIRTUAL,
+      allowNull: false,
+    },
     photo: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -57,16 +61,6 @@ const AuthModel = sequelize.define(
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: new Date(),
-    },
-    browserName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "unknown",
-    },
-    deviceType: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "unknown",
     },
     createAt: {
       type: DataTypes.DATE,

@@ -19,7 +19,7 @@ const registerSchema = joi.object().keys({
     "string.empty": "Password is a required field",
   }),
   confirmPassword: joi.string().required().valid(joi.ref("password")).messages({
-    "any.only": "Passwords should match",
+    "any.only": "Passwords do not match",
     "any.required": "Confirm password is a required field",
   }),
 });

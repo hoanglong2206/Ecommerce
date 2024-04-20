@@ -21,13 +21,20 @@ class password {
   }
 
   async changePassword(req, res) {
-    const response = await authService.changePassword(
-      req.body.currentPassword,
-      req.body.newPassword
-    );
-    res.status(StatusCodes.OK).json({
-      message: response.data.message,
-    });
+    try {
+      const response = await authService.changePassword(
+        req.body.currentPassword,
+        req.body.newPassword,
+        req.body.confirmNewPassword
+      );
+      res.status(StatusCodes.OK).json({
+        message: response.data.message,
+      });
+    } catch (error) {
+      res.status(StatusCodes.BAD_REQUEST).json({
+        message: error.response.data.message,
+      });
+    }
   }
 }
 

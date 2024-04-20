@@ -15,13 +15,12 @@ const {
   updatePasswordToken,
   getAuthUserByPasswordToken,
   updatePassword,
-  getUserByUsername,
 } = require("../services/auth.service");
 
 async function forgotPassword(req, res) {
   const { error } = await Promise.resolve(emailSchema.validate(req.body));
   if (error?.details) {
-    return res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.BAD_REQUEST).json({
       message: error.details[0].message,
     });
   }
@@ -29,7 +28,7 @@ async function forgotPassword(req, res) {
   const { email } = req.body;
   const existingUser = await getUserByEmail(email);
   if (!existingUser) {
-    return res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.BAD_REQUEST).json({
       message: "User not found",
     });
   }
@@ -61,21 +60,21 @@ async function forgotPassword(req, res) {
 async function resetPassword(req, res) {
   const { error } = await Promise.resolve(passwordSchema.validate(req.body));
   if (error?.details) {
-    return res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.BAD_REQUEST).json({
       message: error.details[0].message,
     });
   }
   const { password, confirmPassword } = req.body;
   const { token } = req.params;
   if (password !== confirmPassword) {
-    return res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.BAD_REQUEST).json({
       message: "Passwords do not match",
     });
   }
 
   const existingUser = await getAuthUserByPasswordToken(token);
   if (!existingUser) {
-    return res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.BAD_REQUEST).json({
       message: "Invalid token",
     });
   }
@@ -103,18 +102,37 @@ async function changePassword(req, res) {
     changePasswordSchema.validate(req.body)
   );
   if (error?.details) {
-    return res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.BAD_REQUEST).json({
       message: error.details[0].message,
     });
   }
-  const { newPassword } = req.body;
 
-  const existingUser = await getUserByUsername(`${req.currentUser?.username}`);
+  const existingUser = await getUserByEmail(`${req.currentUser?.email}`);
   if (!existingUser) {
-    return res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.NOT_FOUND).json({
       message: "User not found",
     });
   }
+
+  const { currentPassword, newPassword, confirmNewPassword } = req.body;
+
+  const passwordMatch = await AuthModel.prototype.comparePassword(
+    currentPassword,
+    existingUser.password
+  );
+
+  if (!passwordMatch) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Password is incorrect",
+    });
+  }
+
+  if (newPassword !== confirmNewPassword) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Passwords do not match",
+    });
+  }
+
   const hashedPassword = await AuthModel.prototype.hashPassword(newPassword);
   await updatePassword(existingUser.id, hashedPassword);
 

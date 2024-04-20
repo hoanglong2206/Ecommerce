@@ -3,11 +3,17 @@ const { authService } = require("../../services/api/auth.service");
 
 class CurrentUser {
   async read(_req, res) {
-    const response = await authService.getCurrentUser();
-    res.status(StatusCodes.OK).json({
-      message: response.data.message,
-      user: response.data.user,
-    });
+    try {
+      const response = await authService.getCurrentUser();
+      res.status(StatusCodes.OK).json({
+        message: response.data.message,
+        user: response.data.user,
+      });
+    } catch (error) {
+      res.status(StatusCodes.BAD_REQUEST).json({
+        message: error.response.data.message,
+      });
+    }
   }
 
   async resendEmail(req, res) {

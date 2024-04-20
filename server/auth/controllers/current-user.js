@@ -9,6 +9,7 @@ const {
   updateVerifyEmailField,
 } = require("../services/auth.service");
 const { lowerCase } = require("../utils/helper");
+const { omit } = require("lodash");
 
 async function currentUser(req, res) {
   let user = null;
@@ -18,14 +19,18 @@ async function currentUser(req, res) {
     user = existingUser;
   }
 
-  res.status(StatusCodes.OK).json({ message: "Authenticated user", user });
+  const userData = omit(user, ["emailVerificationToken", "passwordResetToken"]);
+
+  res
+    .status(StatusCodes.OK)
+    .json({ message: "Authenticated user", user: userData });
 }
 
 async function resendEmail(req, res) {
   const { email, userId } = req.body;
   const checkIfUserExist = await getUserByEmail(lowerCase(email));
   if (!checkIfUserExist) {
-    return res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.BAD_REQUEST).json({
       message: "User not found",
     });
   }

@@ -33,7 +33,11 @@ async function createAuthUser(data) {
       "Auth user created successfully"
     );
 
-    const userData = omit(result.dataValues, ["password"]);
+    const userData = omit(result.dataValues, [
+      "password",
+      "confirmPassword",
+      "emailVerificationToken",
+    ]);
     return userData;
   } catch (error) {
     log.error(error);
@@ -85,7 +89,12 @@ async function getUserByEmail(email) {
     const user = await AuthModel.findOne({
       where: { email: lowerCase(email) },
     });
-    return user?.dataValues;
+
+    if (!user) {
+      return null;
+    }
+
+    return user.dataValues;
   } catch (error) {
     log.error(error);
   }

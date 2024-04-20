@@ -9,7 +9,7 @@ async function login(req, res) {
   const { error } = await Promise.resolve(loginSchema.validate(req.body));
 
   if (error?.details) {
-    return res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.BAD_REQUEST).json({
       message: error.details[0].message,
     });
   }
@@ -19,7 +19,7 @@ async function login(req, res) {
   const existingUser = await getUserByEmail(email);
 
   if (!existingUser) {
-    return res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.BAD_REQUEST).json({
       message: "User not found",
     });
   }
@@ -30,7 +30,7 @@ async function login(req, res) {
   );
 
   if (!passwordMatch) {
-    return res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.BAD_REQUEST).json({
       message: "Invalid credentials",
     });
   }
@@ -40,7 +40,11 @@ async function login(req, res) {
     existingUser.email,
     existingUser.username
   );
-  const userData = omit(existingUser, ["password"]);
+  const userData = omit(existingUser, [
+    "password",
+    "emailVerificationToken",
+    "passwordResetToken",
+  ]);
 
   res.status(StatusCodes.OK).json({
     message: "User logged in successfully",

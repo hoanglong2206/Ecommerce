@@ -22,10 +22,11 @@ class AuthService {
     return response;
   }
 
-  async changePassword(currentPassword, newPassword) {
+  async changePassword(currentPassword, newPassword, confirmNewPassword) {
     const response = await axiosAuthInstance.put("/change-password", {
       currentPassword,
       newPassword,
+      confirmNewPassword,
     });
     return response;
   }
@@ -69,25 +70,6 @@ class AuthService {
     );
     return response;
   }
-
-  async getProducts(query, from, size, type) {
-    const response = await this.axiosService.axios.get(
-      `/search/product/${from}/${size}/${type}?${query}`
-    );
-    return response;
-  }
-
-  async getProduct(productId) {
-    const response = await this.axiosService.axios.get(
-      `/search/product/${productId}`
-    );
-    return response;
-  }
-
-  // async seed(count) {
-  //   const response = await this.axiosService.axios.put(`/seed/${count}`);
-  //   return response;
-  // }
 }
 
 module.exports = {

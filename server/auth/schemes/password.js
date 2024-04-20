@@ -34,6 +34,14 @@ const changePasswordSchema = joi.object().keys({
     "string.max": "Invalid password",
     "string.empty": "Password is a required field",
   }),
+  confirmNewPassword: joi
+    .string()
+    .required()
+    .valid(joi.ref("newPassword"))
+    .messages({
+      "any.only": "Passwords do not match",
+      "any.required": "Confirm new password is a required field",
+    }),
 });
 
 module.exports = {

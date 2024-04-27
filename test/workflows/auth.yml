@@ -1,0 +1,66 @@
+name: Jobber Auth Pipeline
+
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }} # Assuming secret name
+  DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }} # Assuming secret name
+  IMAGE_NAME:
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20 # Or your desired Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Unit test
+        run: npm run test
+
+      - name: Login to Docker Hub
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+      - name: Build Docker image
+        run: docker build -t $IMAGE_NAME .
+
+      - name: Tag image with build number and stable tag
+        run: |
+          docker tag $IMAGE_NAME $IMAGE_NAME:${{ github.sha }}
+          docker tag $IMAGE_NAME $IMAGE_NAME:stable
+
+      - name: Push Docker image to registry
+        run: |
+          docker push $IMAGE_NAME:${{ github.sha }}
+          docker push $IMAGE_NAME:stable
+
+      #   - name: Deploy to Kubernetes (replace with your deployment steps)
+
+      - name: Clean up artifacts (optional)
+        run: |
+          docker rmi $IMAGE_NAME:${{ github.sha }}
+          docker rmi $IMAGE_NAME:stable
+
+    #   - name: Notify Slack on success (replace with your Slack notification action)
+    #     uses: ... # Replace with the Slack notification action of your choice
+    #     if: success()
+    #     with:
+    #       channel: jobber-jenkins # Replace with your channel
+    #       message: "BUILD SUCCEEDED: Jobber Auth Service (Build #${{ github.sha }})"
+    #       color: good
+
+    #   - name: Notify Slack on failure (replace with your Slack notification action)
+    #     uses: ... # Replace with the Slack notification action of your choice
+    #     if: failure()
+    #     with:
+    #       channel: jobber-jenkins # Replace with your channel
+    #       message: "BUILD FAILED: Jobber Auth Service (Build #${{ github.sha }})"
+    #       color: error

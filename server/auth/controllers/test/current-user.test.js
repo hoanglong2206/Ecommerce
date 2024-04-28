@@ -67,7 +67,7 @@ describe("CurrentUser", () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: "Authenticated user",
-        user: null,
+        user: {},
       });
     });
   });

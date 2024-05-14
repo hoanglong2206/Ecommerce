@@ -32,6 +32,12 @@ const userSchema = new mongoose.Schema(
       enum: ["user", "admin"],
       default: "user",
     },
+    productPurchased: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+      },
+    ],
     active: {
       type: Boolean,
       default: true,
@@ -48,5 +54,10 @@ const userSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+userSchema.pre(/^find/, function (next) {
+  this.find({ active: { $ne: false } }).sort({ createAt: -1 });
+  next();
+});
 
 module.exports = mongoose.model("User", userSchema);

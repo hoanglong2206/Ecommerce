@@ -29,16 +29,6 @@ const AuthModel = sequelize.define(
       defaultValue:
         "https://res.cloudinary.com/dalz888e7/image/upload/v1684910195/my_image_user/default-user.jpg.jpg",
     },
-    gender: {
-      type: DataTypes.ENUM,
-      defaultValue: "other",
-      values: ["male", "female", "other"],
-    },
-    role: {
-      type: DataTypes.ENUM,
-      defaultValue: "user",
-      values: ["admin", "user"],
-    },
     passwordResetToken: { type: DataTypes.STRING, allowNull: true },
     passwordResetExpires: {
       type: DataTypes.DATE,

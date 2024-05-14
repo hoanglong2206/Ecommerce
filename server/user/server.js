@@ -11,6 +11,7 @@ const { checkConnection } = require("./elasticsearch");
 const { createConnection } = require("./queues/connection");
 const appRoutes = require("./routes");
 const { StatusCodes } = require("http-status-codes");
+const { consumeUserDirectMessage } = require("./queues/user.consumer");
 
 const SERVER_PORT = 4003;
 const log = winstonLogger(
@@ -61,7 +62,8 @@ function routesMiddleware(app) {
 }
 
 async function startQueues() {
-  await createConnection();
+  const userChannel = await createConnection();
+  await consumeUserDirectMessage(userChannel);
 }
 
 function startElasticsearch() {

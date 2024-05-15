@@ -8,7 +8,8 @@ import {
   ProductDetail,
   Shopping,
 } from "@/pages";
-import { DefaultLayout } from "@/layouts";
+import { DefaultLayout, AdminLayout } from "@/layouts";
+import { Customer, Product, Message, Order, Dashboard } from "@/pages/admin";
 
 function App() {
   return (
@@ -20,6 +21,13 @@ function App() {
         <Route path="/product-detail/:id" element={<ProductDetail />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<Register />} />
+      </Route>
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<Dashboard />} />
+        <Route path="product" element={<Product />} />
+        <Route path="customer" element={<Customer />} />
+        <Route path="order" element={<Order />} />
+        <Route path="message" element={<Message />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

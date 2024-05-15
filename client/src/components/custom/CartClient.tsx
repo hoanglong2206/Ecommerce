@@ -1,10 +1,10 @@
-import { MoveLeft, Undo2 } from "lucide-react";
-import { Button } from "../ui/button";
-import { Link, NavigateFunction, useNavigate } from "react-router-dom";
+// import { Undo2 } from "lucide-react";
+// import { Button } from "../ui/button";
+// import { NavigateFunction, useNavigate } from "react-router-dom";
 import { CartCheckout, CartList } from "@/components";
 
 const CartClient = () => {
-  const navigate: NavigateFunction = useNavigate();
+  // const navigate: NavigateFunction = useNavigate();
   return (
     <>
       {/* <div className="flex flex-col items-center space-y-4">

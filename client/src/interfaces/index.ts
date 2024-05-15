@@ -12,6 +12,7 @@ export interface Product {
   imageCover: string;
   images: string[];
   comments: Comments[];
+  createdAt: string;
 }
 
 export interface Comments {
@@ -27,9 +28,10 @@ export interface Users {
   id: string;
   name: string;
   email: string;
-  gender: string;
+  gender: "male" | "female" | "other";
   photo: string;
-  role: string;
+  role: "admin" | "user" | "guest";
+  createdAt: string;
 }
 
 export interface Size {
@@ -41,4 +43,21 @@ export interface Color {
   name: string;
   code: string;
   quantity: number;
+}
+
+export interface Order {
+  id: string;
+  user: Users;
+  products: Product[];
+  total: number;
+  status: "success" | "pending" | "cancelled" | "failed";
+  createdAt: string;
+}
+
+export interface Cart {
+  id: string;
+  user: Users;
+  products: Product[];
+  total: number;
+  createdAt: string;
 }

@@ -9,6 +9,7 @@ export { default as SidebarNav } from "./custom/SidebarNav";
 export { default as SearchBar } from "./custom/SearchBar";
 export { default as MenuNavbar } from "./custom/MenuNavbar";
 export { default as Banner } from "./custom/Banner";
+export { default as CustomModal } from "./custom/CustomModal";
 
 export { default as BannerCard } from "./custom/BannerCard";
 export { default as BlogCard } from "./custom/BlogCard";
@@ -23,7 +24,6 @@ export { default as ProductInfo } from "./custom/ProductInfo";
 export { default as ProductImages } from "./custom/ProductImages";
 export { default as ProductReviews } from "./custom/ProductReviews";
 export { default as ProductAction } from "./custom/ProductAction";
-export { default as ProductPreviewModal } from "./custom/ProductPreviewModal";
 export { default as ProductNotFound } from "./custom/ProductNotFound";
 
 export { default as CartClient } from "./custom/CartClient";

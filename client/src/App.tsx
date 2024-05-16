@@ -7,6 +7,7 @@ import {
   Cart,
   ProductDetail,
   Shopping,
+  Profile,
 } from "@/pages";
 import { DefaultLayout, AdminLayout } from "@/layouts";
 import { Customer, Product, Message, Order, Dashboard } from "@/pages/admin";
@@ -21,6 +22,7 @@ function App() {
         <Route path="/product-detail/:id" element={<ProductDetail />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />

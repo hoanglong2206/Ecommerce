@@ -34,7 +34,7 @@ const DropdownUser = () => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup className="space-y-1">
           <DropdownMenuItem>
-            <Link to="profile" className="flex items-center gap-2.5">
+            <Link to="/profile" className="flex items-center gap-2.5">
               <User2 className="w-5 h-5" />
               <span className="text-base font-medium text-black dark:text-white">
                 Profile

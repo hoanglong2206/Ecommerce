@@ -7,11 +7,7 @@ import { useNavigate, NavigateFunction } from "react-router-dom";
 import { Expand, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { CartProductType } from "./ProductInfo";
-import {
-  ProductImages,
-  ProductAction,
-  ProductPreviewModal,
-} from "@/components";
+import { ProductImages, ProductAction, CustomModal } from "@/components";
 
 interface ProductCardProps {
   data: Product;
@@ -91,7 +87,7 @@ const ProductCard = ({ data }: ProductCardProps) => {
           </div>
         </div>
       </div>
-      <ProductPreviewModal open={open} onClose={() => setOpen(false)}>
+      <CustomModal size="max-w-3xl" open={open} onClose={() => setOpen(false)}>
         <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
           <div className="sm:col-span-4 lg:col-span-5">
             <ProductImages data={data} />
@@ -135,7 +131,7 @@ const ProductCard = ({ data }: ProductCardProps) => {
             </div>
           </div>
         </div>
-      </ProductPreviewModal>
+      </CustomModal>
     </>
   );
 };

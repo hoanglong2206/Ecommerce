@@ -5,7 +5,7 @@ import { HeaderAdmin, SidebarAdmin } from "@/components";
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-100">
+    <div className="flex h-screen overflow-hidden bg-slate-50 dark:bg-slate-900">
       <SidebarAdmin sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-auto">
         <HeaderAdmin

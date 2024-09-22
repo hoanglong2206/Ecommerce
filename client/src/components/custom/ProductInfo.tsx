@@ -1,6 +1,11 @@
 import { Rating } from "@mui/material";
 import { Button } from "@/components/ui/button";
-import { CircleCheck, Heart, ShoppingBag, ShoppingCart } from "lucide-react";
+import {
+  // CircleCheck,
+  Heart,
+  ShoppingBag,
+  ShoppingCart,
+} from "lucide-react";
 import { useState } from "react";
 import { Product } from "@/interfaces";
 import { ProductAction, ProductImages } from "@/components";

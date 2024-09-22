@@ -12,7 +12,6 @@ export interface Product {
   imageCover: string;
   images: string[];
   comments: Comments[];
-  createdAt: string;
 }
 
 export interface Comments {
@@ -31,7 +30,6 @@ export interface Users {
   gender: "male" | "female" | "other";
   photo: string;
   role: "admin" | "user" | "guest";
-  createdAt: string;
 }
 
 export interface Size {

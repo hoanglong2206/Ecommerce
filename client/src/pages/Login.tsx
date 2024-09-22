@@ -49,7 +49,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="w-full flex min-h-full flex-col justify-center py-12 px-6 lg:px-8 px-4">
+    <div className="w-full flex min-h-full flex-col justify-center py-12 px-6 lg:px-8">
       <Card className="sm:mx-auto sm:w-full sm:max-w-md">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl mb-2">

@@ -1,11 +1,7 @@
 import { products } from "@/utils/products";
 import { ProductCard } from "@/components";
 
-interface ProductListProps {
-  typeList: string;
-}
-
-const ProductList = ({ typeList }: ProductListProps) => {
+const ProductList = () => {
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
       {products.map((product, index) => (

@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Logo } from "@/components";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
@@ -48,11 +49,11 @@ const Login = () => {
     }
   };
   return (
-    <div className="w-full flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
+    <div className="w-full flex min-h-full flex-col justify-center py-12 px-6 lg:px-8 px-4">
       <Card className="sm:mx-auto sm:w-full sm:max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">
-            <Icons.logo className="mx-auto w-12" />
+          <CardTitle className="text-2xl mb-2">
+            <Logo />
           </CardTitle>
           <CardDescription className="text-center text-xl font-bold tracking-tight text-gray-900 dark:text-white">
             Sign in to your account

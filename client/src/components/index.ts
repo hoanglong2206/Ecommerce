@@ -5,7 +5,7 @@ export { default as SubNavbar } from "./custom/SubNavbar";
 export { default as Footer } from "./custom/Footer";
 export { default as Logo } from "./custom/Logo";
 export { default as Container } from "./custom/Container";
-export { default as SidebarNav } from "./custom/SidebarNav";
+export { default as Sidebar } from "./custom/Sidebar";
 export { default as SearchBar } from "./custom/SearchBar";
 export { default as MenuNavbar } from "./custom/MenuNavbar";
 export { default as Banner } from "./custom/Banner";

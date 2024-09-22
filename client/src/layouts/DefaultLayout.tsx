@@ -1,4 +1,4 @@
-import { Footer, Navbar, SidebarNav } from "@/components";
+import { Footer, Navbar, Sidebar } from "@/components";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 
@@ -8,7 +8,7 @@ const DefaultLayout = () => {
     <div className="h-full flex flex-col min-h-screen ">
       <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <main className="flex-grow">
-        <SidebarNav sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <Outlet />
       </main>
       <Footer />

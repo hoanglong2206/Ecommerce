@@ -1,5 +1,5 @@
 import {
-  DarkModeButton,
+  // DarkModeButton,
   DropdownUser,
   Logo,
   HoverCart,
@@ -38,7 +38,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }: NavbarProps) => {
         </div>
         <SearchBar visible />
         <div className="flex items-center gap-x-3">
-          <DarkModeButton />
+          {/* <DarkModeButton /> */}
 
           <HoverNotification />
 

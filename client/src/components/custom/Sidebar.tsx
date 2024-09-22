@@ -11,12 +11,12 @@ import { Accordion } from "@/components/ui/accordion";
 import { Icons } from "@/utils/icon";
 import { AccordionSidebar } from "@/components";
 
-interface SidebarNavProps {
+interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (arg: boolean) => void;
 }
 
-const SidebarNav = ({ sidebarOpen, setSidebarOpen }: SidebarNavProps) => {
+const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const location = useLocation();
   const { pathname } = location;
 
@@ -169,4 +169,4 @@ const SidebarNav = ({ sidebarOpen, setSidebarOpen }: SidebarNavProps) => {
   );
 };
 
-export default SidebarNav;
+export default Sidebar;
